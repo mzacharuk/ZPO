@@ -2,7 +2,7 @@ package pl.mzacharuk;
 
 import java.util.Scanner;
 
-public class NumberConverte {
+public class NumberConverter {
 
     static int number = 0b1101_1000;
 
