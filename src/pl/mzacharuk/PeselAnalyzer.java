@@ -12,7 +12,14 @@ public class PeselAnalyzer {
         Scanner scanner = new Scanner(System.in);
         infoFromPesel.add(scanner.nextLine());
 
-        String dateOfBirth = infoFromPesel.get(0).substring(0, 6);
+        String dateOfBirth = "";
+        try{
+            dateOfBirth = infoFromPesel.get(0).substring(0, 6);
+        }catch(StringIndexOutOfBoundsException e){
+            System.out.println("Niepoprawny pesel. Spróbuj ponownie.");
+            System.exit(0);
+        }
+
 
         infoFromPesel.add(getDateOfBirth(dateOfBirth));
 
