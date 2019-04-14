@@ -1,12 +1,15 @@
 package pl.mzacharuk;
 
 public class BookWithAuthograph extends BookDecorator {
-    public BookWithAuthograph(Publication decoratedPublication) {
+    private String autograph;
+
+    public BookWithAuthograph(Publication decoratedPublication, String autograph) {
         super(decoratedPublication);
+        this.autograph = autograph;
     }
 
     @Override
     public String getInfoAboutBook() {
-        return null;
+        return decoratedPublication.getInfoAboutBook()+" | "+autograph;
     }
 }
