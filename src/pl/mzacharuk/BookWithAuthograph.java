@@ -10,6 +10,10 @@ public class BookWithAuthograph extends BookDecorator {
 
     @Override
     public String getInfoAboutBook() {
-        return decoratedPublication.getInfoAboutBook()+" | "+autograph;
+        if(this.decoratedPublication.getInfoAboutBook().contains(autograph)){
+            return decoratedPublication.getInfoAboutBook() + "\t Ta ksiazka posiada juz autograf";
+        }else{
+            return decoratedPublication.getInfoAboutBook()+" | "+autograph;
+        }
     }
 }

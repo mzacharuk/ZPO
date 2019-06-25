@@ -9,6 +9,13 @@ public class BookWithWrapper extends BookDecorator {
 
     @Override
     public String getInfoAboutBook() {
-        return decoratedPublication.getInfoAboutBook()+" | "+wrapper;
+
+        if(this.decoratedPublication.getInfoAboutBook().contains(wrapper)){
+            return decoratedPublication.getInfoAboutBook()+" \t Ta ksiazka posiada juz okladke";
+        }else if(!this.decoratedPublication.getInfoAboutBook().contains("okładka")){
+            return  decoratedPublication.getInfoAboutBook()+"\t Nie można obłożyć obwolutą książki, która nie posiada okładki";
+        }else{
+            return decoratedPublication.getInfoAboutBook()+" | "+wrapper;
+        }
     }
 }

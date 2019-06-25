@@ -12,6 +12,10 @@ public class BookWithHardcover extends BookDecorator {
 
     @Override
     public String getInfoAboutBook() {
-        return decoratedPublication.getInfoAboutBook()+" | "+cover;
+        if(this.decoratedPublication.getInfoAboutBook().contains("okładka")){
+            return decoratedPublication.getInfoAboutBook() + " \t Ta ksiazka posiada juz okladke";
+        }else{
+            return decoratedPublication.getInfoAboutBook()+" | "+cover;
+        }
     }
 }
