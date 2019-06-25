@@ -1,1 +1,2 @@
 ZPO 2019 POLITECHNIKA LODZKA
+Decorator Pattern
