@@ -7,7 +7,6 @@ public class BookWithHardcover extends BookDecorator {
 
     public BookWithHardcover(Publication decoratedPublication) {
         super(decoratedPublication);
-        //hasCover = true;
     }
 
     @Override
