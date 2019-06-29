@@ -1,45 +1,30 @@
-import com.google.common.base.Splitter;
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import java.util.ArrayList;
+;
+import java.util.concurrent.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    private final static ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
-        String stringToSplit = "Ala ma kota";
+    public static void main(String[] args) throws Exception {
 
-        ArrayList<String> myList = stringSplitter(stringToSplit, 4);
-        for(String s: myList){
-            System.out.println(s);
-        }
-        System.out.println("===================");
-        Iterable<String> splitted = Splitter.fixedLength(4).split(stringToSplit);
-        for(String s : splitted){
-            System.out.println(s);
-        }
-
-
+//        Race.readUrlAndGetData(15);
+        startRace();
 
     }
 
-    public static ArrayList<String> stringSplitter(@NonNull String s, int length) throws IllegalArgumentException{
-        if(length <=0 || s==null){
-            throw new IllegalArgumentException();
-        }
-        String myString;
-        ArrayList<String> list = new ArrayList<String>();
-        int counter = 0;
+    private static void startRace() throws Exception {
+        Race race = new Race(15);
 
-        while(counter<s.length()){
-            if((counter+length)>=s.length()){
-                myString = s.substring(counter, s.length());
-            }else {
-                myString = s.substring(counter, counter + length);
+        final ScheduledFuture<?> raceHandle;
+            raceHandle = executor.scheduleAtFixedRate(race, 0, 2, TimeUnit.SECONDS);
+
+        executor.schedule(() -> {
+            if(!raceHandle.isCancelled()) {
+                raceHandle.cancel(true);
             }
-            list.add(myString);
-            counter+=length;
-        }
-        return list;
+            if(!executor.isShutdown()){
+                executor.shutdown();
+            }
+        }, 25, TimeUnit.SECONDS);
     }
 }
